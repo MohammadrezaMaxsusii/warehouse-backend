@@ -57,7 +57,6 @@ app.use("*", (req, res, next) => {
 });
 
 // #########################################################
-// Run App
-app.listen(configurations.app.port, () => {
+app.listen(configurations.app.port, "0.0.0.0", () => {
   console.log(`🌐\tServer running on port ${configurations.app.port}`);
 });
