@@ -234,7 +234,7 @@ export const taskDoneWithCreate = async (
       project: parentTask.project,
       taskFlowDesc: taskManagementFlowList.BUY_PRODUCT,
       description:
-        "محصولات خریداری شده و پس از تایید در اختیار تیم فنی قرار خواهد گرفت",
+        "محصولات آماده  نصب و پس از تایید به اتمام خواهد رسید",
     };
 
     createTask(taskData);

@@ -55,8 +55,10 @@ app.use("*", (req, res, next) => {
 
   return res.status(404).json(response);
 });
+console.log(`Using port: ${configurations.app.port || 8000}`);
+
 
 // #########################################################
-app.listen(configurations.app.port, "0.0.0.0", () => {
-  console.log(`🌐\tServer running on port ${configurations.app.port}`);
+app.listen(configurations.app.port || 8000, "0.0.0.0", () => {
+  console.log(`🌐 Server running on http://0.0.0.0:${configurations.app.port || 8000}`);
 });
