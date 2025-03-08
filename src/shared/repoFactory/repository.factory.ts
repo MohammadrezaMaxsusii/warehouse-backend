@@ -18,7 +18,12 @@ import { ProductModel } from "../../products/product.schema";
 import { RoleModel } from "../../roles/role.schema";
 import { UnitRepository } from "../../unit/unit.repository";
 import { UnitModel } from "../../unit/unit.schema";
-
+import { WorkflowModel } from "../../workflow/workflow.schema";
+import { WorkflowRepository } from "../../workflow/workflow.repository";
+import { FormModel } from "../../forms/forms.schema";
+import { FormsRepository } from "../../forms/forms.repository";
+import { WorkflowTaskModel } from "../../workflow-tasks/workflowTask.schema";
+import { WorkflowTaskRepository } from "../../workflow-tasks/workflowTask.repository";
 type repoTypes =
   | "permission"
   | "role"
@@ -30,7 +35,9 @@ type repoTypes =
   | "project"
   | "product"
   | "unit"
-  ;
+  | "workflow"
+  | "forms"
+  | "workflowTask";
 
 class RepositoryFactory {
   private static instance: RepositoryFactory;
@@ -45,11 +52,16 @@ class RepositoryFactory {
     private readonly taskRepo = new TaskRepository(TaskModel),
     private readonly projectRepo = new ProjectRepository(ProjectModel),
     private readonly productRepo = new ProductRepository(ProductModel),
-    private readonly UnitRepo = new UnitRepository(UnitModel)
+    private readonly UnitRepo = new UnitRepository(UnitModel),
+    private readonly workflowRepo = new WorkflowRepository(WorkflowModel),
+    private readonly formsRepo = new FormsRepository(FormModel),
+    private readonly workflowTaskRepo = new WorkflowTaskRepository(
+      WorkflowTaskModel
+    )
   ) {}
 
-/*************  ✨ Codeium Command ⭐  *************/
-/******  0dc13335-9e64-4120-af58-5655378f8a92  *******/
+  /*************  ✨ Codeium Command ⭐  *************/
+  /******  0dc13335-9e64-4120-af58-5655378f8a92  *******/
   getRepo<T>(type: repoTypes): T {
     switch (type) {
       case "permission":
@@ -77,7 +89,16 @@ class RepositoryFactory {
         return this.productRepo as T;
 
       case "unit":
-        return this.UnitRepo as T ;
+        return this.UnitRepo as T;
+
+      case "workflow":
+        return this.workflowRepo as T;
+
+      case "forms":
+        return this.formsRepo as T;
+
+      case "workflowTask":
+        return this.workflowTaskRepo as T;
 
       default:
         throw new Error(`Unknown repository type: ${type}`);

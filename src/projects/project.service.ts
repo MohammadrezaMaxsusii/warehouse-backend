@@ -15,8 +15,6 @@ import { TaskRepository } from "../tasks/tasks.repository";
 import { Task_Statuses_Enum } from "../tasks/enums/task-statuses.enum";
 import { IPayload } from "../auth/interfaces/jwt-payload.interface";
 import { Types } from "mongoose";
-import { ProductErrorMessages } from "../products/enums/product-messages.enum";
-import { createProjectPruductsWithCsv } from "./functions/createProjectPruductsWithCsv";
 
 const permissionRepo = RepoFactory.getRepo<PermissionRepository>("permission");
 const ProjectRepo = RepoFactory.getRepo<ProjectRepository>("project");
@@ -36,13 +34,11 @@ export const createProject = async (
     };
   }
 
-  const result = await ProjectRepo.create(data);
-  await Promise.allSettled(
-    
-    (data.files || []).map((file) =>
-      createProjectPruductsWithCsv(file as Types.ObjectId, result , payload.roleIds[0])
-    )
-  );
+  const result = await ProjectRepo.create({
+    ...data,
+    unit: new Types.ObjectId(data.unit as any),
+  });
+
   return {
     statusCode: httpStatus.CREATED,
     message: ProjectSuccessMessages.CREATED,

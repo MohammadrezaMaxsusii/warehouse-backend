@@ -10,7 +10,7 @@ import {
   ProductErrorMessages,
   ProductSuccessMessages,
 } from "./enums/product-messages.enum";
-import { IProduct, IProductWithCsv } from "./products.interface";
+import { IProduct } from "./products.interface";
 import { IPayload } from "../auth/interfaces/jwt-payload.interface";
 import { Task_Statuses_Enum } from "../tasks/enums/task-statuses.enum";
 import { Types } from "mongoose";
@@ -19,15 +19,13 @@ import { RoleRepository } from "../roles/role.repository";
 import { TaskRepository } from "../tasks/tasks.repository";
 import { ProjectRepository } from "../projects/project.repository";
 import { taskManagementFlowList } from "../taskMnagement/enums/taskManagement-messages.enum";
-import { ProjectSuccessMessages } from "../projects/enums/project-messages.enum";
-import { FileRepository } from "../files/file.repository";
+import { ITask } from "../tasks/tasks.interface";
+
 const permissionRepo = RepoFactory.getRepo<PermissionRepository>("permission");
 const ProductRepo = RepoFactory.getRepo<ProductRepository>("product");
 const roleRepo = RepoFactory.getRepo<RoleRepository>("role");
 const TaskRepo = RepoFactory.getRepo<TaskRepository>("task");
 const ProjectRepo = RepoFactory.getRepo<ProjectRepository>("project");
-const fileRepo = RepoFactory.getRepo<FileRepository>("file")
-
 export const createProduct = async (
   data: Partial<IProduct>,
   payload: IPayload
@@ -49,7 +47,7 @@ export const createProduct = async (
   if (!projectId) {
     return {
       statusCode: httpStatus.NOT_FOUND,
-      message: ProjectSuccessMessages.FOUND,
+      message: ProductErrorMessages.NOT_FOUND,
     };
   } else {
     const updateProjectProductIds = await ProjectRepo.findOneAndUpdate(

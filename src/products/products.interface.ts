@@ -12,9 +12,3 @@ export interface IProduct extends IBaseModel {
   serialNumber?: string;
   name ?: string;
 }
-
-
-
-export interface IProductWithCsv {
-  excelId: string;
-}

@@ -34,4 +34,6 @@ export const UpdateProjectDto = [
     .optional()
     .isMongoId()
     .withMessage("فرمت شناسه فایل صحیح نیست"),
+
+  body("unit").optional().isMongoId().withMessage("فرمت شناسه واحد صحیح نیست"),
 ];

@@ -1,6 +1,6 @@
 import { body } from "express-validator";
 
-const validMimetypes = ["image/jpeg", "image/png", "application/pdf","text/csv"];
+const validMimetypes = ["image/jpeg", "image/png", "application/pdf"];
 
 export interface IUploadFileData {
   name: string;

@@ -9,5 +9,4 @@ export enum ProductSuccessMessages {
 export enum ProductErrorMessages {
   DUPLICATE = "محصول تکراری است",
   NOT_FOUND = "محصول پیدا نشد",
-  CSV_FILE_NOT_FOUND = "فایل CSV پیدا نشد",
 }

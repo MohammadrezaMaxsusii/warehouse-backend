@@ -1,9 +1,28 @@
-import { IProject } from "./project.interface";
+import { IProject, IProjectDate } from "./project.interface";
 import { model, Schema } from "mongoose";
 import { baseSchema } from "../shared";
 import { Project_Statuses_Enum } from "./enums/project-statuses.enu";
 
-const ProjectSchema: Schema = new Schema(
+const ProjectDateSchema: Schema = new Schema<IProjectDate>({
+  name: {
+    type: String,
+    required: false,
+  },
+  description: {
+    type: String,
+    required: false,
+  },
+  startDate: {
+    type: Date,
+    required: true,
+  },
+  endDate: {
+    type: Date,
+    required: false,
+  },
+});
+
+const ProjectSchema: Schema = new Schema<IProject>(
   {
     name: {
       type: String,
@@ -30,6 +49,15 @@ const ProjectSchema: Schema = new Schema(
       required: false,
       default: Project_Statuses_Enum.ACTIVE,
     },
+    unit: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "Unit",
+      autopopulate: true,
+    },
+    dates: { type: [ProjectDateSchema], required: false, default: [] },
+    cellPhone: { type: String, required: false },
+    email: { type: String, required: false },
     ...baseSchema,
   },
   {

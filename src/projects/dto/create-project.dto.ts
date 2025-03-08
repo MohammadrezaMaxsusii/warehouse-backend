@@ -18,4 +18,34 @@ export const CreateProjectDto = [
   body("files").isArray().withMessage("فایل ها باید در قالب لیست ارسال شوند"),
 
   body("files.*").isMongoId().withMessage("فرمت شناسه فایل صحیح نیست"),
+
+  body("unit").isMongoId().withMessage("فرمت شناسه واحد صحیح نیست"),
+
+  body("dates")
+    .optional()
+    .isArray()
+    .withMessage("تاریخ ها باید در قالب لیست ارسال شوند"),
+
+  body("dates.*.name")
+    .optional()
+    .isString()
+    .withMessage("نام سررسید باید متن باشد"),
+
+  body("dates.*.description")
+    .optional()
+    .isString()
+    .withMessage("توضیحات سررسید باید متن باشد"),
+
+  body("dates.*.startDate")
+    .isDate()
+    .withMessage("تاریخ شروع سررسید باید تاریخ باشد"),
+
+  body("dates.*.endDate")
+    .optional()
+    .isDate()
+    .withMessage("تاریخ اتمام سررسید باید تاریخ باشد"),
+
+  body("cellPhone").optional().isString().withMessage("شماره تلفن صحیح نیست"),
+
+  body("email").optional().isEmail().withMessage("ایمیل صحیح نیست"),
 ];

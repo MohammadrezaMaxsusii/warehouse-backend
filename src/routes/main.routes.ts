@@ -9,7 +9,12 @@ import taskController from "../tasks/tasks.controller";
 import projectController from "../projects/project.controller";
 import taskManagementController from "../taskMnagement/taskManagement.controller";
 import ProductController from "../products/product.controller";
+import workflowController from "../workflow/workflow.controller";
+
 import UnitController from "../unit/unit.controller";
+import formController from "../forms/forms.controller";
+import workflowEngineController from "../workflow/engine/workflow.engine.controller";
+
 const router = Router();
 
 // Endpoints of authentication
@@ -42,7 +47,15 @@ router.use("/products", ProductController);
 // Endpoints of taskManagenement
 router.use("/taskManagement", taskManagementController);
 
+// Endpoints of workflow
+router.use("/workflows", workflowController);
 // Endpoints of unit
 router.use("/unit", UnitController);
+
+// Endpoints of forms
+router.use("/forms", formController);
+
+// Endpoints of workflow engine
+router.use("/workflow-engine", workflowEngineController);
 
 export default router;
